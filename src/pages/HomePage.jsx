@@ -1,23 +1,19 @@
-import ButtonC from "../components/ButtonC"
+import { Outlet } from "react-router"
+import Header from "../components/Header"
+import { NavLink } from "react-router-dom"
 
-const HomePage = ({ age, data }) => {
-
-
-
-
+const HomePage = () => {
   return (
     <div>
-      <h1>Hello jee</h1>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsa, dolor delectus ex reprehenderit neque doloribus impedit vel. Eius facilis neque non eligendi ipsum magni totam, incidunt consectetur ullam dolor.</p>
 
+      <Header />
+      <h1>hello jee</h1>
+      <NavLink to={'/page-1'}>Page1</NavLink>
+      <NavLink to={'/page-2'}>Page2</NavLink>
 
-      <ButtonC text={'hello Jee'} color={'bg-black'} />
-      <ButtonC text={'hello See'} color={'bg-orange-500'} />
-      <ButtonC text={'Hello Si'} color={'bg-yellow-900'} />
+      <Outlet />
 
-      {/* <button onClick={showDialog} className="bg-orange-500 text-white px-4 py-1 rounded-lg">Hello See</button>
-
-      <button onClick={showDialog} className="bg-yellow-900 text-white px-4 py-1 rounded-lg">Hello Si</button> */}
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat itaque commodi explicabo cupiditate. Voluptas deleniti eius, alias magni explicabo nobis, eveniet officiis tempore corrupti quis similique totam ipsa unde. Aperiam!</p>
     </div>
   )
 }
