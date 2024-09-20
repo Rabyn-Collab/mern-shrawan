@@ -3,34 +3,31 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
-import Page1 from "./pages/nested/Page1";
-import Page2 from "./pages/nested/Page2";
+import RootLayOut from "./components/RootLayOut";
+
 
 const App = () => {
 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <HomePage />,
+      element: <RootLayOut />,
       children: [
         {
-          path: 'page-1',
-          element: <Page1 />
+          index: true,
+          element: <HomePage />
         },
         {
-          path: 'page-2',
-          element: <Page2 />
+          path: 'about-page',
+          element: <AboutPage />
+        },
+        {
+          path: 'contact-page',
+          element: <ContactPage />
         },
       ]
     },
-    {
-      path: 'about-page',
-      element: <AboutPage />
-    },
-    {
-      path: 'contact-page',
-      element: <ContactPage />
-    },
+
     {
       path: '*',
       element: <NotFound />

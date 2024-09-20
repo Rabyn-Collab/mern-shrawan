@@ -10,10 +10,7 @@ const Header = () => {
         <NavLink
           className={(e) => e.isActive ? 'text-red-900' : ''}
           to={'/about-page'}>About</NavLink>
-
-
         <Link
-
           to={'/contact-page'}>Contact</Link>
 
       </nav>
