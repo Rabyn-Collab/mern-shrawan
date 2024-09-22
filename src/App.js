@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
 import RootLayOut from "./components/RootLayOut";
+import HomePage from "./pages/home/HomePage";
 
 
 const App = () => {
@@ -35,9 +35,6 @@ const App = () => {
 
 
   ]);
-
-
-
 
   return <RouterProvider router={router} />;
 }
