@@ -1,6 +1,11 @@
+import DisplaySection from "./DisplaySection"
+import Tech from "./Tech"
+
 const HomePage = () => {
   return (
-    <div>
+    <div className="space-y-11">
+      <DisplaySection />
+      <Tech />
 
     </div>
   )
