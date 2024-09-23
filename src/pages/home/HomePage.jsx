@@ -1,4 +1,5 @@
 import DisplaySection from "./DisplaySection"
+import Info from "./Info"
 import Tech from "./Tech"
 
 const HomePage = () => {
@@ -6,6 +7,7 @@ const HomePage = () => {
     <div className="space-y-11">
       <DisplaySection />
       <Tech />
+      <Info />
 
     </div>
   )
