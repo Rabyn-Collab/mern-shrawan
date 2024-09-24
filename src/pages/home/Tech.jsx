@@ -2,6 +2,7 @@ import { DiAtom, DiDatabase, DiDebian, DiJava, DiJavascript, DiMarkdown, DiNodej
 
 const Tech = () => {
   return (
+
     <div className="grid grid-cols-auto place-items-center gap-y-10">
 
       <DiMarkdown size={200} className="hover:scale-150 ease-in duration-700 hover:text-red-700  cursor-pointer" />
