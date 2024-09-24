@@ -14,9 +14,9 @@ const HomePage = () => {
     <div>
       <h1>{count}</h1>
       <p>{isEven ? 'Even' : 'Odd'}</p>
-      <button onClick={handleincrement}>Click to increment</button>
+      <button onClick={handleincrement}>Click for increment</button>
       <br />
-      <button onClick={handledecrement}>Click to decrement</button>
+      <button onClick={handledecrement}>Click for decrement</button>
 
     </div>
   )
