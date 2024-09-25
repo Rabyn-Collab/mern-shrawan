@@ -1,25 +1,42 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import { faker } from '@faker-js/faker';
 
 const HomePage = () => {
-  const [count, setCount] = useState(0);
-  const handleincrement = () => {
-    setCount(count + 1);
+  const [posts, setPosts] = useState([]);
+
+  const postAdd = () => {
+    const postData = {
+      username: faker.internet.userName(),
+      image: faker.image.avatar(),
+      email: faker.internet.email(),
+      description: faker.lorem.sentences(),
+    };
+    setPosts((prevPosts) => [...prevPosts, postData]);
   };
-  const handledecrement = () => {
-    setCount(count - 1);
-  };
-  const isEven = count % 2 === 0;
+
+  useEffect(() => {
+    // Add a post on initial render
+    postAdd();
+  }, []);
 
   return (
-    <div>
-      <h1>{count}</h1>
-      <p>{isEven ? 'Even' : 'Odd'}</p>
-      <button onClick={handleincrement}>Click for increment</button>
-      <br />
-      <button onClick={handledecrement}>Click for decrement</button>
+    <>
+      <div className="">
+        {posts.map((post, index) => (
+          <div key={index} className="p-2 border border-gray-200 rounded">
+            <img src={post.image} alt={post.username} className="w-16 h-16 rounded-full" />
+            <h3>{post.username}</h3>
+            <p>{post.email}</p>
+            <p>{post.description}</p>
+          </div>
+        ))}
+      </div>
 
-    </div>
-  )
-}
+      <button onClick={postAdd} className="mt-4 p-2 bg-blue-500 text-white rounded">
+        Add Post
+      </button>
+    </>
+  );
+};
 
-export default HomePage
+export default HomePage;
