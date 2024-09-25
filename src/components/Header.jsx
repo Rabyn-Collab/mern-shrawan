@@ -14,7 +14,9 @@ const Header = () => {
           to={'/contact-page'}>Contact</Link>
 
       </nav>
+
     </header>
+
   )
 }
 export default Header
