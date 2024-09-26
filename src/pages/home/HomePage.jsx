@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { faker } from '@faker-js/faker';
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
 
+
   const postAdd = () => {
     const postData = {
+      id: faker.string.uuid(),
       username: faker.internet.userName(),
       image: faker.image.avatar(),
       email: faker.internet.email(),
@@ -14,20 +16,25 @@ const HomePage = () => {
     setPosts((prevPosts) => [...prevPosts, postData]);
   };
 
-  useEffect(() => {
-    // Add a post on initial render
-    postAdd();
-  }, []);
+  const postDelete = (id) => {
+    setPosts((prevPosts) => prevPosts.filter(post => post.id !== id));
+  };
 
   return (
     <>
       <div className="">
-        {posts.map((post, index) => (
-          <div key={index} className="p-2 border border-gray-200 rounded">
+        {posts.map((post) => (
+          <div key={post.id} className="p-2 border border-gray-200 rounded mb-4">
             <img src={post.image} alt={post.username} className="w-16 h-16 rounded-full" />
             <h3>{post.username}</h3>
             <p>{post.email}</p>
             <p>{post.description}</p>
+            <button
+              onClick={() => postDelete(post.id)}
+              className="mt-2 p-2 bg-red-500 text-white rounded"
+            >
+              Delete
+            </button>
           </div>
         ))}
       </div>
