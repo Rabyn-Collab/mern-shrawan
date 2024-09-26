@@ -40,7 +40,7 @@ const HomePage = () => {
       </div>
 
       <button onClick={postAdd} className="mt-4 p-2 bg-blue-500 text-white rounded">
-        Add Post
+        Add Posts
       </button>
     </>
   );
