@@ -1,13 +1,7 @@
 import axios from "axios"
 import { useEffect } from "react";
 import { useState } from "react";
-
-
-
-
-
-
-
+import CardCompo from "../components/CardCompo";
 
 
 
@@ -17,21 +11,6 @@ const HomePage = () => {
   const [load, setLoad] = useState(false);
   const [error, setError] = useState();
 
-
-
-  //   getData LuFunctionSquare
-  //   setLoad axios
-
-
-  // getData no call
-
-  // kehi samayachi
-  // setData
-  // setaLo
-  //   rerender
-
-  //   rerender
-
   const getData = async () => {
     try {
       setLoad(true);
@@ -40,17 +19,13 @@ const HomePage = () => {
       setLoad(false);
     } catch (err) {
       setLoad(false);
-
+      setError(err.message);
     }
   }
 
   useEffect(() => {
     getData();
-  }, [])
-
-
-  console.log(data);
-
+  }, []);
 
 
 
@@ -59,10 +34,12 @@ const HomePage = () => {
 
 
   return (
-    <div>
+    <div className="p-5 grid grid-cols-3 gap-x-4  gap-y-9">
 
 
-
+      {data && data.categories.map((cata) => {
+        return <CardCompo cata={cata} key={cata.idCategory} />
+      })}
 
 
     </div>

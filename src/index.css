@@ -8,6 +8,10 @@ body {
   font-family: "Poppins", system-ui;
 }
 
+img {
+  width: 100%;
+}
+
 .bx {
   @apply h-[50px] w-[50px] bg-red-100
 }
