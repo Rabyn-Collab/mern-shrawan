@@ -1,23 +1,45 @@
-import ButtonC from "../components/ButtonC"
+import axios from "axios"
+import { useEffect } from "react";
+import { useState } from "react";
+import CardCompo from "../components/CardCompo";
 
-const HomePage = ({ age, data }) => {
+
+
+const HomePage = () => {
+
+  const [data, setData] = useState();
+  const [load, setLoad] = useState(false);
+  const [error, setError] = useState();
+
+  const getData = async () => {
+    try {
+      setLoad(true);
+      const response = await axios.get('https://www.themealdb.com/api/json/v1/1/categories.php');
+      setData(response.data);
+      setLoad(false);
+    } catch (err) {
+      setLoad(false);
+      setError(err.message);
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
 
 
 
 
   return (
-    <div>
-      <h1>Hello jee</h1>
-      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsa, dolor delectus ex reprehenderit neque doloribus impedit vel. Eius facilis neque non eligendi ipsum magni totam, incidunt consectetur ullam dolor.</p>
+    <div className="p-5 grid grid-cols-3 gap-x-4  gap-y-9">
 
 
-      <ButtonC text={'hello Jee'} color={'bg-black'} />
-      <ButtonC text={'hello See'} color={'bg-orange-500'} />
-      <ButtonC text={'Hello Si'} color={'bg-yellow-900'} />
+      {data && data.categories.map((cata) => {
+        return <CardCompo cata={cata} key={cata.idCategory} />
+      })}
 
-      {/* <button onClick={showDialog} className="bg-orange-500 text-white px-4 py-1 rounded-lg">Hello See</button>
 
-      <button onClick={showDialog} className="bg-yellow-900 text-white px-4 py-1 rounded-lg">Hello Si</button> */}
     </div>
   )
 }
