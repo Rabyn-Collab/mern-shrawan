@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router"
+import { ListCard } from "../components/ListCard";
 
 const CategoryItems = () => {
 
@@ -34,6 +35,8 @@ const CategoryItems = () => {
   return (
     <div>
 
+
+      {data && <ListCard meals={data.meals} />}
 
 
 
