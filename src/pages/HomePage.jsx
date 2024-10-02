@@ -27,7 +27,7 @@ const HomePage = () => {
     getData();
   }, []);
 
-  console.log(data);
+
 
 
   return (
