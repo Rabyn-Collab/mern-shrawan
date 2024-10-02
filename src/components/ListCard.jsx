@@ -19,7 +19,7 @@ export function ListCard({ meals }) {
               className="flex items-center justify-between pb-3 pt-3 last:pb-0"
             >
               <div className="flex items-center gap-x-3">
-                {/* flskmf */}
+                {/* flskmf jnsa jabs*/}
                 <Avatar size="sm" src={strMealThumb} alt={strMealThumb} />
                 <div>
                   <Typography color="blue-gray" variant="h6">
