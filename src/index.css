@@ -1,11 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: "Poppins", system-ui;
+@layer base {
+  h1 {
+    @apply text-2xl
+  }
+}
+
+@layer components {
+  .bx {
+    @apply h-[50px] w-[50px] bg-red-100
+  }
+}
+
+@layer utilities {
+  .text-red-100 {
+    color: purple;
+  }
 }
 
 img {
