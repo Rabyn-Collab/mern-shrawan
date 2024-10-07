@@ -1,6 +1,11 @@
+import AddForm from "./AddForm"
+
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <div>
+
+      <AddForm />
+    </div>
   )
 }
 export default HomePage

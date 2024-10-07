@@ -16,8 +16,6 @@ const App = () => {
           index: true,
           element: <HomePage />
         },
-
-
       ]
     },
 
