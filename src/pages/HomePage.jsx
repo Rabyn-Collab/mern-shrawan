@@ -1,21 +1,39 @@
-
-import CardCompo from "../components/CardCompo";
-import { categoryApi } from "../data/apiUrls";
-import { useApiHooks } from "../hooks/apiHooks";
-
+import { useEffect, useMemo, useState } from "react"
+import SamplePage from "./SamplePage";
+import ItemPage from "./ItemPage";
 
 
 const HomePage = () => {
-  const [data, load, error] = useApiHooks(categoryApi);
+
+  const [show, setShow] = useState(true);
+  const [count, setCount] = useState(0);
+
+
+  const showSome = useMemo(() => {
+    for (let i = 0; i <= 1000000000; i++);
+    return count * 2;
+  }, [count]);
+
+
+  const handleClick = () => {
+    setShow((prev) => !prev);
+  }
+
+  const handleCount = () => {
+    setCount((prev) => prev + 1);
+  }
+
 
 
   return (
-    <div className="p-5 grid grid-cols-3 gap-x-4  gap-y-9">
+    <div className="p-4">
+
+      <button onClick={handleCount}>Click Me</button>
+      <h1>{showSome}</h1>
+
+      <button onClick={handleClick}>Show Logic {`${show ? 'dark' : 'white'}`}</button>
 
 
-      {data && data.categories.map((cata) => {
-        return <CardCompo cata={cata} key={cata.idCategory} />
-      })}
 
 
     </div>
