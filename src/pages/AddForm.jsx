@@ -1,5 +1,15 @@
 import { Button, Checkbox, Input, Option, Radio, Select, Textarea, Typography } from "@material-tailwind/react"
 import { Formik } from "formik";
+import * as Yup from 'yup';
+const valSchema = Yup.object(
+  {
+    title: Yup.string().min(10).max(150).required(),
+    detail: Yup.string().required(),
+    pLang: Yup.string().required(),
+    colors: Yup.array().min(1).required(),
+    country: Yup.string().required(),
+  }
+);
 
 const AddForm = () => {
 
@@ -20,43 +30,56 @@ const AddForm = () => {
         onSubmit={(val) => {
           console.log(val);
         }}
+        validationSchema={valSchema}
       >
 
         {({ handleChange, handleSubmit, values, touched, errors, setFieldValue }) => {
+          console.log(errors);
 
           return <form onSubmit={handleSubmit} className="space-y-5">
 
-            <div>
+            <div className="space-y-2">
               <Input
                 onChange={handleChange}
                 name="title"
                 label="Title"
                 value={values.title}
               />
+
+              {errors.title && touched.title && <p className="text-red-600">{errors.title}</p>}
             </div>
 
-            <div className="flex gap-10">
-              <Radio
-                onChange={handleChange}
-                value={"HTML"}
-                name="pLang" label="HTML" />
-              <Radio
-                onChange={handleChange}
-                value={"REACT"}
-                name="pLang" label="React" />
+            <div className="w-max">
+              <div className="flex gap-10">
+                <Radio
+                  onChange={handleChange}
+                  value={"HTML"}
+                  name="pLang" label="HTML" />
+                <Radio
+                  onChange={handleChange}
+                  value={"REACT"}
+                  name="pLang" label="React" />
+              </div>
+
+              {errors.pLang && touched.pLang && <p className="text-red-600">{errors.pLang}</p>}
             </div>
 
-            <div className="flex w-max gap-4">
-              <Checkbox
-                name="colors"
-                onChange={handleChange}
-                value={"Blue"}
-                color="blue" label="Blue" />
-              <Checkbox
-                name="colors"
-                onChange={handleChange}
-                value={"Red"}
-                color="red" label="Red" />
+            <div className=" w-max ">
+              <div className="flex gap-2">
+                <Checkbox
+                  name="colors"
+                  onChange={handleChange}
+                  value={"Blue"}
+                  color="blue" label="Blue" />
+                <Checkbox
+                  name="colors"
+                  onChange={handleChange}
+                  value={"Red"}
+                  color="red" label="Red" />
+              </div>
+
+
+              {errors.colors && touched.colors && <p className="text-red-600">{errors.colors}</p>}
 
             </div>
 
@@ -69,6 +92,7 @@ const AddForm = () => {
                 <Option value="China">China</Option>
 
               </Select>
+              {errors.country && touched.country && <p className="text-red-600">{errors.country}</p>}
             </div>
 
 
@@ -82,6 +106,8 @@ const AddForm = () => {
                 label="Detail"
                 value={values.detail}
               />
+
+              {errors.detail && touched.detail && <p className="text-red-600">{errors.detail}</p>}
             </div>
 
 
