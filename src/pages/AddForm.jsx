@@ -1,13 +1,20 @@
+import { ur } from "@faker-js/faker";
 import { Button, Checkbox, Input, Option, Radio, Select, Textarea, Typography } from "@material-tailwind/react"
 import { Formik } from "formik";
 import * as Yup from 'yup';
+const supportedtypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
 const valSchema = Yup.object(
   {
+    // title: Yup.string().matches(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "please enter valid email").required(),
     title: Yup.string().min(10).max(150).required(),
     detail: Yup.string().required(),
     pLang: Yup.string().required(),
     colors: Yup.array().min(1).required(),
     country: Yup.string().required(),
+    image: Yup.mixed().test('filetype', 'Please Select an image', (value) => {
+
+      return value && supportedtypes.includes(value.type);
+    }).required()
   }
 );
 
@@ -26,6 +33,8 @@ const AddForm = () => {
           pLang: '',
           colors: [],
           country: '',
+          image: null,
+          preview: ''
         }}
         onSubmit={(val) => {
           console.log(val);
@@ -34,7 +43,7 @@ const AddForm = () => {
       >
 
         {({ handleChange, handleSubmit, values, touched, errors, setFieldValue }) => {
-          console.log(errors);
+
 
           return <form onSubmit={handleSubmit} className="space-y-5">
 
@@ -109,6 +118,23 @@ const AddForm = () => {
 
               {errors.detail && touched.detail && <p className="text-red-600">{errors.detail}</p>}
             </div>
+
+            <div>
+              <input
+                onChange={(e) => {
+                  const img = URL.createObjectURL(e.target.files[0]);
+                  setFieldValue("image", img);
+                  setFieldValue("preview", img);
+                  console.log(e.target.files[0]);
+                }}
+                name="image"
+                label="Image"
+                type="file" />
+
+
+
+            </div>
+            <img src={values.preview} alt="" />
 
 
             <Button type="submit" className="py-2">Submit</Button>
