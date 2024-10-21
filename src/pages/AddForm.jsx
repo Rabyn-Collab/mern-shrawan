@@ -2,7 +2,7 @@ import { ur } from "@faker-js/faker";
 import { Button, Checkbox, Input, Option, Radio, Select, Textarea, Typography } from "@material-tailwind/react"
 import { Formik } from "formik";
 import * as Yup from 'yup';
-const supportedtypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
+const supportedtypes = ["image/png", "image/jpeg", "image/jpg", "image/gif", "image/webp"];
 const valSchema = Yup.object(
   {
     // title: Yup.string().matches(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "please enter valid email").required(),
@@ -14,7 +14,8 @@ const valSchema = Yup.object(
     image: Yup.mixed().test('filetype', 'Please Select an image', (value) => {
 
       return value && supportedtypes.includes(value.type);
-    }).required()
+    })
+      .test('fileSize', 'Please select an image less than 2MB', (value) => value && value.size <= 2 * 1024 * 1024).required()
   }
 );
 
@@ -122,14 +123,16 @@ const AddForm = () => {
             <div>
               <input
                 onChange={(e) => {
-                  const img = URL.createObjectURL(e.target.files[0]);
-                  setFieldValue("image", img);
-                  setFieldValue("preview", img);
+                  const imgpath = URL.createObjectURL(e.target.files[0]);
+                  setFieldValue("preview", imgpath);
+                  setFieldValue("image", e.target.files[0]);
                   console.log(e.target.files[0]);
                 }}
                 name="image"
                 label="Image"
                 type="file" />
+
+              {errors.image && touched.image && <p className="text-red-600">{errors.image}</p>}
 
 
 
