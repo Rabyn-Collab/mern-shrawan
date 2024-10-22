@@ -9,9 +9,7 @@ const Header = () => {
       <nav className="space-x-4 sm:hidden ">
         <NavLink
           className={(e) => e.isActive ? 'text-red-900' : ''}
-          to={'/about-page'}>About</NavLink>
-        <Link
-          to={'/contact-page'}>Contact</Link>
+          to={'/add-form'}>Add Post</NavLink>
 
       </nav>
     </header>
