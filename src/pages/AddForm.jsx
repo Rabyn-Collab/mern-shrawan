@@ -1,7 +1,9 @@
 import { ur } from "@faker-js/faker";
 import { Button, Checkbox, Input, Option, Radio, Select, Textarea, Typography } from "@material-tailwind/react"
 import { Formik } from "formik";
+import { useDispatch } from "react-redux";
 import * as Yup from 'yup';
+<<<<<<< HEAD
 const supportedtypes = ["image/png", "image/jpeg", "image/jpg", "image/gif", "image/webp"];
 const valSchema = Yup.object(
   {
@@ -17,9 +19,37 @@ const valSchema = Yup.object(
     })
       .test('fileSize', 'Please select an image less than 2MB', (value) => value && value.size <= 2 * 1024 * 1024).required()
   }
+=======
+import { addPost } from '../redux/postSlice';
+import { nanoid } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router";
+const supportedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/gif'];
+
+
+const valSchema = Yup.object(
+  // {
+  //   title: Yup.string().min(10, 'Title should be more than 10').max(150, 'Title should be less than 150').required(),
+  //   detail: Yup.string().required(),
+  //   pLang: Yup.string().required(),
+  //   colors: Yup.array().min(1).required(),
+  //   country: Yup.string().required(),
+  //   image: Yup.mixed().test('fileType', 'File type not supported', (value) => {
+  //     console.log(value)
+  //     return value && supportedTypes.includes(value.type);
+  //   })
+  //     // .
+  //     //   test('fileSize', 'File size should be less than 2MB', (value) => {
+  //     //     return value && value.size <= 2 * 1024 * 1024;
+  //     //   })
+  //     .required('File is required'),
+  // }
+>>>>>>> 3512594022f37c78b198fde0bdac1a88ca742799
 );
 
 const AddForm = () => {
+
+  const dispatch = useDispatch();
+  const nav = useNavigate();
 
   return (
     <div className="max-w-[370px] p-5" >
@@ -38,13 +68,22 @@ const AddForm = () => {
           preview: ''
         }}
         onSubmit={(val) => {
-          console.log(val);
+
+          delete val.image;
+          dispatch(addPost({ ...val, id: nanoid() }));
+          nav(-1);
+
         }}
         validationSchema={valSchema}
       >
 
         {({ handleChange, handleSubmit, values, touched, errors, setFieldValue }) => {
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 3512594022f37c78b198fde0bdac1a88ca742799
 
           return <form onSubmit={handleSubmit} className="space-y-5">
 
@@ -106,7 +145,23 @@ const AddForm = () => {
             </div>
 
 
+            <div>
+              <Input
+                onChange={(e) => {
+                  const imagePath = URL.createObjectURL(e.target.files[0]);
+                  setFieldValue("preview", imagePath);
+                  setFieldValue("image", e.target.files[0]);
 
+                }}
+                name="image"
+                label="Image"
+                type="file"
+              />
+
+              {errors.image && touched.image && <p className="text-red-600">{errors.image}</p>}
+            </div>
+
+            <img src={values.preview} alt="" />
 
 
             <div>
