@@ -3,23 +3,6 @@ import { Button, Checkbox, Input, Option, Radio, Select, Textarea, Typography } 
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
 import * as Yup from 'yup';
-<<<<<<< HEAD
-const supportedtypes = ["image/png", "image/jpeg", "image/jpg", "image/gif", "image/webp"];
-const valSchema = Yup.object(
-  {
-    // title: Yup.string().matches(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "please enter valid email").required(),
-    title: Yup.string().min(10).max(150).required(),
-    detail: Yup.string().required(),
-    pLang: Yup.string().required(),
-    colors: Yup.array().min(1).required(),
-    country: Yup.string().required(),
-    image: Yup.mixed().test('filetype', 'Please Select an image', (value) => {
-
-      return value && supportedtypes.includes(value.type);
-    })
-      .test('fileSize', 'Please select an image less than 2MB', (value) => value && value.size <= 2 * 1024 * 1024).required()
-  }
-=======
 import { addPost } from '../redux/postSlice';
 import { nanoid } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router";
@@ -43,7 +26,6 @@ const valSchema = Yup.object(
   //     //   })
   //     .required('File is required'),
   // }
->>>>>>> 3512594022f37c78b198fde0bdac1a88ca742799
 );
 
 const AddForm = () => {
@@ -79,11 +61,8 @@ const AddForm = () => {
 
         {({ handleChange, handleSubmit, values, touched, errors, setFieldValue }) => {
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 3512594022f37c78b198fde0bdac1a88ca742799
 
           return <form onSubmit={handleSubmit} className="space-y-5">
 
