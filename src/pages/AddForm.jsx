@@ -36,7 +36,7 @@ const AddForm = () => {
     <div className="max-w-[370px] p-5" >
 
 
-      <Typography variant="h5" className="mb-4">Add Post</Typography>
+      <Typography variant="h5" className="mb-4">Add post</Typography>
 
       <Formik
         initialValues={{
