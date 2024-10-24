@@ -10,22 +10,22 @@ const supportedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'i
 
 
 const valSchema = Yup.object(
-  // {
-  //   title: Yup.string().min(10, 'Title should be more than 10').max(150, 'Title should be less than 150').required(),
-  //   detail: Yup.string().required(),
-  //   pLang: Yup.string().required(),
-  //   colors: Yup.array().min(1).required(),
-  //   country: Yup.string().required(),
-  //   image: Yup.mixed().test('fileType', 'File type not supported', (value) => {
-  //     console.log(value)
-  //     return value && supportedTypes.includes(value.type);
-  //   })
-  //     // .
-  //     //   test('fileSize', 'File size should be less than 2MB', (value) => {
-  //     //     return value && value.size <= 2 * 1024 * 1024;
-  //     //   })
-  //     .required('File is required'),
-  // }
+  {
+    title: Yup.string().min(10, 'Title should be more than 10').max(150, 'Title should be less than 150').required(),
+    detail: Yup.string().required(),
+    pLang: Yup.string().required(),
+    colors: Yup.array().min(1).required(),
+    country: Yup.string().required(),
+    image: Yup.mixed().test('fileType', 'File type not supported', (value) => {
+      console.log(value)
+      return value && supportedTypes.includes(value.type);
+    })
+      // .
+      //   test('fileSize', 'File size should be less than 2MB', (value) => {
+      //     return value && value.size <= 2 * 1024 * 1024;
+      //   })
+      .required('File is required'),
+  }
 );
 
 const AddForm = () => {
@@ -50,7 +50,6 @@ const AddForm = () => {
           preview: ''
         }}
         onSubmit={(val) => {
-
           delete val.image;
           dispatch(addPost({ ...val, id: nanoid() }));
           nav(-1);
