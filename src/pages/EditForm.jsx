@@ -1,10 +1,10 @@
 import { Button, Checkbox, Input, Option, Radio, Select, Textarea, Typography } from "@material-tailwind/react"
 import { Formik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from 'yup';
-import { addPost } from '../redux/postSlice';
+import { addPost, updatePost } from '../redux/postSlice';
 import { nanoid } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 const supportedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp', 'image/gif'];
 
 
@@ -15,19 +15,25 @@ const valSchema = Yup.object(
     pLang: Yup.string().required(),
     colors: Yup.array().min(1).required(),
     country: Yup.string().required(),
-    image: Yup.mixed().test('fileType', 'File type not supported', (value) => {
-      console.log(value)
-      return value && supportedTypes.includes(value.type);
-    })
-      // .
-      //   test('fileSize', 'File size should be less than 2MB', (value) => {
-      //     return value && value.size <= 2 * 1024 * 1024;
-      //   })
-      .required('File is required'),
+    // image: Yup.mixed().test('fileType', 'File type not supported', (value) => {
+    //   console.log(value)
+    //   return value && supportedTypes.includes(value.type);
+    // })
+    //   // .
+    //   //   test('fileSize', 'File size should be less than 2MB', (value) => {
+    //   //     return value && value.size <= 2 * 1024 * 1024;
+    //   //   })
+    //   .required('File is required'),
   }
 );
 
-const AddForm = () => {
+const EditForm = () => {
+  const { posts } = useSelector((state) => state.postSlice);
+
+
+  const { id } = useParams();
+  const post = posts.find((post) => post.id === id);
+
 
   const dispatch = useDispatch();
   const nav = useNavigate();
@@ -36,22 +42,38 @@ const AddForm = () => {
     <div className="max-w-[370px] p-5" >
 
 
-      <Typography variant="h5" className="mb-4">Add Post</Typography>
+      <Typography variant="h5" className="mb-4">Edit Post</Typography>
 
       <Formik
         initialValues={{
-          title: '',
-          detail: '',
-          pLang: '',
-          colors: [],
-          country: '',
+          title: post.title,
+          detail: post.detail,
+          pLang: post.pLang,
+          colors: post.colors,
+          country: post.country,
           image: null,
-          preview: ''
+          preview: post.preview
         }}
         onSubmit={(val) => {
-          delete val.image;
-          dispatch(addPost({ ...val, id: nanoid() }));
-          nav(-1);
+
+          if (val.image) {
+            if (supportedTypes.includes(val.image.type)) {
+
+              delete val.image;
+              dispatch(updatePost({ ...val, id: id }));
+              nav(-1);
+
+            } else {
+
+            }
+
+          } else {
+            delete val.image;
+            dispatch(updatePost({ ...val, id: id }));
+            nav(-1);
+          }
+
+
 
         }}
         validationSchema={valSchema}
@@ -65,6 +87,8 @@ const AddForm = () => {
           return <form onSubmit={handleSubmit} className="space-y-5">
 
             <div className="space-y-2">
+
+
               <Input
                 onChange={handleChange}
                 name="title"
@@ -80,10 +104,12 @@ const AddForm = () => {
                 <Radio
                   onChange={handleChange}
                   value={"HTML"}
+                  checked={values.pLang === "HTML"}
                   name="pLang" label="HTML" />
                 <Radio
                   onChange={handleChange}
                   value={"REACT"}
+                  checked={values.pLang === "REACT"}
                   name="pLang" label="React" />
               </div>
 
@@ -96,10 +122,12 @@ const AddForm = () => {
                   name="colors"
                   onChange={handleChange}
                   value={"Blue"}
+                  checked={values.colors.includes("Blue")}
                   color="blue" label="Blue" />
                 <Checkbox
                   name="colors"
                   onChange={handleChange}
+                  checked={values.colors.includes("Red")}
                   value={"Red"}
                   color="red" label="Red" />
               </div>
@@ -111,6 +139,8 @@ const AddForm = () => {
 
             <div className="w-full">
               <Select
+
+                value={values.country}
                 onChange={(e) => setFieldValue("country", e)}
                 name="country"
                 label="Select Country">
@@ -178,4 +208,4 @@ const AddForm = () => {
     </div>
   )
 }
-export default AddForm
+export default EditForm

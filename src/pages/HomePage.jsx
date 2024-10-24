@@ -3,6 +3,16 @@ import CardAni from "../components/CardAni";
 //
 const HomePage = () => {
 
+
+  // const ng = [
+  //   { id: 1, name: 'ram' },
+  //   { id: 2, name: 'shyam' },
+  // ];
+
+  // const m = ng.map((p) => p.id === 1 ? 9 : p);
+
+  // console.log(m);
+
   const { posts } = useSelector((state) => state.postSlice);
 
 
