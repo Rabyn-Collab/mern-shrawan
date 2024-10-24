@@ -11,7 +11,7 @@ const HomePage = () => {
 
   // const m = ng.map((p) => p.id === 1 ? 9 : p);
 
-  // console.log(m);
+  // console.log(m) jee;
 
   const { posts } = useSelector((state) => state.postSlice);
 
