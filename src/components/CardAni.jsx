@@ -1,7 +1,9 @@
 import { IconButton } from "@material-tailwind/react"
 import { CustomDialog } from "./CustomDialog"
+import { useNavigate } from "react-router"
 
-const CardAni = ({ post: { title, detail, preview }, index }) => {
+const CardAni = ({ post: { title, detail, preview, id }, index }) => {
+  const nav = useNavigate();
 
   return (
     <div className="cursor-pointer group relative flex flex-col  bg-white shadow-sm border border-slate-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
@@ -19,7 +21,9 @@ const CardAni = ({ post: { title, detail, preview }, index }) => {
       </div>
       <div className="flex justify-end space-x-4 pr-2 pb-3">
 
-        <IconButton color="green" size="sm">
+        <IconButton
+          onClick={() => nav(`/edit-form/${id}`)}
+          color="green" size="sm">
           <i className="fas fa-edit" />
         </IconButton>
         <CustomDialog index={index} />
