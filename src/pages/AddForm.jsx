@@ -135,7 +135,8 @@ const AddForm = () => {
                 type="file"
               />
 
-              {errors.image && touched.image && <p className="text-red-600">{errors.image}</p>}
+              {errors.image && touched.image && <p className="text-red-700
+              ">{errors.image}</p>}
             </div>
 
             <img src={values.preview} alt="" />
