@@ -106,7 +106,7 @@ const AddForm = () => {
               </div>
 
 
-              {errors.colors && touched.colors && <p className="text-red-600">{errors.colors}</p>}
+              {errors.colors && touched.colors && <p className="text-red-500">{errors.colors}</p>}
 
             </div>
 
