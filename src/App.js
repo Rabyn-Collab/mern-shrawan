@@ -1,8 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import RootLayOut from "./components/RootLayOut";
-import HomePage from "./pages/HomePage";
-import AddForm from "./pages/AddForm";
-import EditForm from "./pages/EditForm";
+import RootLayout from "./ui/RootLayout";
+import CocktailPage from "./features/cocktail/CocktailPage";
+
 
 
 const App = () => {
@@ -11,27 +10,17 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <RootLayOut />,
+      element: <RootLayout />,
       children: [
         {
           index: true,
-          element: <HomePage />
+          element: <CocktailPage />
         },
-        {
-          path: 'add-form',
-          element: <AddForm />
-        },
-        {
-          path: 'edit-form/:id',
-          element: <EditForm />
-        },
+
       ]
     },
 
-    // {
-    //   path: '*',
-    //   element: <NotFound />
-    // },
+
 
 
   ]);

@@ -1,10 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { postSlice } from "../redux/postSlice";
-
+import { cocktailApi } from "../features/cocktail/cocktailApi";
 
 
 export const store = configureStore({
   reducer: {
-    [postSlice.name]: postSlice.reducer
-  }
+
+    [cocktailApi.reducerPath]: cocktailApi.reducer
+
+  },
+  //caching, polling, invalidation and others
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([
+
+    cocktailApi.middleware
+
+  ])
 });
