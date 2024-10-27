@@ -1,7 +1,19 @@
+<<<<<<< HEAD
+=======
 import { useSelector } from "react-redux"
 import CardAni from "../components/CardAni";
 //
 const HomePage = () => {
+
+
+  // const ng = [
+  //   { id: 1, name: 'ram' },
+  //   { id: 2, name: 'shyam' },
+  // ];
+
+  // const m = ng.map((p) => p.id === 1 ? 9 : p);
+
+  // console.log(m) jee;
 
   const { posts } = useSelector((state) => state.postSlice);
 
@@ -20,3 +32,4 @@ const HomePage = () => {
   )
 }
 export default HomePage
+>>>>>>> 6ebb9c67770efd6dfcb378cfea718544a8820130
