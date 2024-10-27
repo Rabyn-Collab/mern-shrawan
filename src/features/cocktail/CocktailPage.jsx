@@ -1,12 +1,17 @@
 import { useGetCocktailsQuery } from "./cocktailApi"
+import { ListCocktail } from "./ListCocktail";
 
 const CocktailPage = () => {
-  const dat = useGetCocktailsQuery();
+  const { isLoading, isFetching, isError, data, error } = useGetCocktailsQuery();
 
 
+  console.log(data);
   return (
     <div>
-      <h1>s;adlksal;k</h1>
+
+
+      {data && <ListCocktail drinks={data.drinks} />}
+
 
     </div>
   )
