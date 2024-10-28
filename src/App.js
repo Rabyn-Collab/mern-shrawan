@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import RootLayout from "./ui/RootLayout";
 import CocktailPage from "./features/cocktail/CocktailPage";
+import ItemDetail from "./features/cocktail/ItemDetail";
 
 
 
@@ -15,6 +16,10 @@ const App = () => {
         {
           index: true,
           element: <CocktailPage />
+        },
+        {
+          path: 'cocktail-detail/:id',
+          element: <ItemDetail />
         },
 
       ]

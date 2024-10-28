@@ -4,8 +4,6 @@ import { ListCocktail } from "./ListCocktail";
 const CocktailPage = () => {
   const { isLoading, isFetching, isError, data, error } = useGetCocktailsQuery();
 
-
-  console.log(data);
   return (
     <div>
 

@@ -18,6 +18,17 @@ export const cocktailApi = createApi({
         },
         method: 'GET'
       })
+    }),
+
+
+    getCocktailById: builder.query({
+      query: (id) => ({
+        url: '/lookup.php',
+        params: {
+          i: id
+        },
+        method: 'GET'
+      })
     })
 
 
@@ -33,4 +44,4 @@ export const cocktailApi = createApi({
 });
 
 
-export const { useGetCocktailsQuery, useLazyGetCocktailsQuery } = cocktailApi;
+export const { useGetCocktailsQuery, useGetCocktailByIdQuery, useLazyGetCocktailsQuery } = cocktailApi;
