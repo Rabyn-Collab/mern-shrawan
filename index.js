@@ -16,6 +16,7 @@ mongoose.connect('mongodb+srv://Rabyn:moles900@cluster0.zeqhj5o.mongodb.net/Shop
 
 
 
+
 app.use(express.json());
 app.use(authRoutes);
 app.use(productRoutes);
