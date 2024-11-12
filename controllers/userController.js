@@ -15,11 +15,6 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ message: 'invalid credential' });
     }
 
-
-
-
-
-
   } catch (err) {
     return res.status(400).json({ message: `${err}` });
 
