@@ -7,7 +7,8 @@ export const loginUser = async (req, res) => {
   try {
     const isExist = await User.findOne({ email: email });
     if (isExist) {
-
+      const pass = bcrypt.compareSync(password, isExist.password);
+      if (!pass) return res.status(401).json({ message: 'invalid credential' });
 
       return res.status(200).json({ message: 'user successfully registered' });
 

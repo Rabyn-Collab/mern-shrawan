@@ -3,12 +3,7 @@
 
 export const someWare = (req, res, next) => {
 
-  console.log(req.body);
 
-
-  const m = () => {
-
-  }
   if (req.body.email) {
     return next();
   }
