@@ -8,5 +8,22 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   endpoints: (builder) => ({
 
+
+    userLogin: builder.mutation({
+
+      query: (query) => ({
+        url: '/users/login',
+        body: query,
+        method: 'POST'
+      })
+
+    })
+
+
+
+
   })
 });
+
+
+export const { useUserLoginMutation } = authApi;
