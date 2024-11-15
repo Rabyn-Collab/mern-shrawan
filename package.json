@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@faker-js/faker": "^9.0.2",
+    "@heroicons/react": "^2.1.5",
     "@material-tailwind/react": "^2.1.10",
     "@reduxjs/toolkit": "^2.3.0",
     "@testing-library/jest-dom": "^5.17.0",

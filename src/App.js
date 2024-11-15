@@ -3,6 +3,7 @@ import RootLayout from "./ui/RootLayout";
 import Products from "./features/product/Products";
 import SignUp from "./features/auth/SignUp";
 import Login from "./features/auth/Login";
+import UserRoutes from "./ui/UserRoutes";
 
 
 const App = () => {
@@ -18,17 +19,25 @@ const App = () => {
           element: <Products />
 
         },
-        {
-          path: 'login',
-          element: <Login />
 
-        },
 
         {
-          path: 'signup',
-          element: <SignUp />
+          element: <UserRoutes />,
+          children: [
+            {
+              path: 'login',
+              element: <Login />
 
+            },
+
+            {
+              path: 'signup',
+              element: <SignUp />
+
+            }
+          ]
         }
+
       ]
     },
 

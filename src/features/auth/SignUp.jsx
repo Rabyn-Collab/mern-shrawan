@@ -41,7 +41,7 @@ const SignUp = () => {
 
 
   return (
-    <Card color="transparent" shadow={false} className="p-4">
+    <Card color="transparent" shadow={false} className="p-4 mx-auto max-w-[350px]">
       <Typography variant="h4" color="blue-gray">
         Sign Up
       </Typography>
