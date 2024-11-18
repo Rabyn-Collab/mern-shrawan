@@ -4,6 +4,7 @@ import authRoutes from './routes/authRoutes.js';
 import mongoose from "mongoose";
 import cors from "cors";
 const port = 5000;
+import cors from 'cors';
 
 const app = express();
 app.use(cors());
@@ -20,8 +21,8 @@ mongoose.connect('mongodb+srv://kunwarmandip3:admin@cluster0.ngq19.mongodb.net/S
 
 
 app.use(express.json());
-app.use("/api/users", authRoutes);
-app.use(productRoutes);
+app.use('/api/users', authRoutes);
+app.use('/api/products', productRoutes);
 
 
 

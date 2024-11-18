@@ -1,21 +1,36 @@
+import Product from "../models/Product.js"
 
 
-const data = [
-  {
-    "id": 1,
-    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-    "body": "qui sunt rem eveniet architecto"
-  },
-  {
-    "id": 2,
-    "title": "qui est esse",
-    "body": "<h1> hhello </h1>"
+
+
+export const getProducts = async (req, res) => {
+
+
+
+  try {
+
+    // search , sort, fields, operator, limit, page , skip
+
+    const excludesFields = ['sort', 'search', 'limit', 'fields', 'skip', 'page'];
+
+    const queryObj = { ...req.query };
+
+
+    excludesFields.forEach((label) => delete queryObj[label]);
+
+
+    let qStr = JSON.stringify(queryObj);
+
+    qStr = qStr.replace(/\b(gte|gt|lte|lt|eq)\b/g, match => `$${match}`);
+
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 10;
+    const skip = (page - 1) * limit;
+
+    const response = await Product.find(JSON.parse(qStr)).skip(skip).limit(limit);
+
+    return res.status(200).json({ length: response.length, products: response });
+  } catch (err) {
+    return res.status(400).json({ err: `${err}` });
   }
-]
-
-export const getAllProducts = (req, res) => {
-  return res.status(200).json(data);
-}
-export const createProduct = (req, res) => {
-  return res.status(200).json({ message: 'creating product' });
 }
