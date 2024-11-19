@@ -10,6 +10,7 @@ export const loginUser = async (req, res) => {
     if (isExist) {
       const pass = bcrypt.compareSync(password, isExist.password);
       if (!pass) return res.status(401).json({ message: 'invalid credential' });
+      console.log(isExist);
 
       const token = jwt.sign({
         id: isExist._id,
