@@ -1,5 +1,6 @@
 import Product from "../models/Product.js"
-
+import fs from 'fs';
+import mongoose from "mongoose";
 
 
 export const getTopProducts = (req, res, next) => {
@@ -69,9 +70,52 @@ export const getProducts = async (req, res) => {
 
 
 export const createProduct = async (req, res) => {
+  const {
+    title,
+    description,
+    category, brand,
+    price, stock } = req.body;
+
   try {
+    await Product.create({
+      title,
+      description,
+      image: req.image,
+      category,
+      brand,
+      price: Number(price),
+      stock: Number(stock),
+    });
     return res.status(200).json({ message: 'success' });
   } catch (err) {
+    console.log(err);
+    fs.unlinkSync(`./uploads/${req.image}`);
+    return res.status(400).json({ message: `${err}` });
+  }
+}
 
+
+
+export const removeProduct = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ message: 'invalid id' });
+
+    const isExist = await Product.findById(id);
+    if (!isExist) return res.status(404).json({ message: 'product not found' });
+
+    await Product.findByIdAndDelete(id);
+    fs.unlink(`./uploads/${isExist.image}`, (err) => {
+      console.log(err);
+    });
+
+
+    return res.status(200).json({ message: 'success' });
+  } catch (err) {
+    console.log(err);
+    fs.unlinkSync(`./uploads/${req.image}`);
+    return res.status(400).json({ message: `${err}` });
   }
 }

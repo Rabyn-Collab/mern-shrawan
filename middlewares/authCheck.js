@@ -9,7 +9,7 @@ export const userCheck = (req, res, next) => {
   if (decode) {
     req.id = decode.id;
     req.isAdmin = decode.isAdmin;
-    next();
+    return next();
   } else {
     return res.status(401).json({ message: 'you are not authorized' });
   }
@@ -18,7 +18,7 @@ export const userCheck = (req, res, next) => {
 
 export const adminCheck = (req, res, next) => {
   if (req.isAdmin) {
-    next();
+    return next();
   } else {
     return res.status(401).json({ message: 'you are not authorized' });
   }
