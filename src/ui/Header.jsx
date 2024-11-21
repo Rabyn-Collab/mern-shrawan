@@ -2,6 +2,7 @@ import { Button, Navbar, Typography } from "@material-tailwind/react";
 import ProfileMenu from "./ProfileMenu";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { NavLink } from "react-router-dom";
 
 export function Header() {
   const nav = useNavigate();
@@ -23,9 +24,10 @@ export function Header() {
 
 
 
-        {user ? <ProfileMenu /> : <Button onClick={() => nav('/login')} size="sm" variant="text">
+        {user ? <ProfileMenu user={user} /> : <Button onClick={() => nav('/login')} size="sm" variant="text">
           <span>Log In</span>
         </Button>}
+
 
       </div>
 

@@ -30,7 +30,7 @@ const Login = () => {
         const response = await userLogin(val).unwrap();
         dispatch(userAdd(response));
         toast.success(response?.message);
-        nav(-1);
+        //nav(-1);
       } catch (err) {
         // console.log(err);
         toast.error(err.data?.message);

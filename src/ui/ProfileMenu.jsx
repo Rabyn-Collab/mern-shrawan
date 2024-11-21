@@ -11,18 +11,16 @@ import {
 import {
   UserCircleIcon,
   ChevronDownIcon,
-  Cog6ToothIcon,
-  InboxArrowDownIcon,
-  LifebuoyIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userLogOut } from "../features/auth/userSlice";
+import { useNavigate } from "react-router";
 
 
-// profile menu component
-const profileMenuItems = [
+// user profile menu component
+const userMenuItems = [
   {
     label: "My Profile",
     icon: UserCircleIcon,
@@ -36,12 +34,34 @@ const profileMenuItems = [
   },
 ];
 
-const ProfileMenu = () => {
+// admin profile menu component
+const adminMenuItems = [
+  {
+    label: "My Profile",
+    icon: UserCircleIcon,
+    value: "profile",
+  },
+  {
+    label: "Products",
+    icon: UserCircleIcon,
+    value: "products",
+  },
+
+  {
+    label: "Sign Out",
+    icon: PowerIcon,
+    value: "signout",
+  },
+];
+
+const ProfileMenu = ({ user }) => {
 
   const dispatch = useDispatch();
+  const nav = useNavigate();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
+  const menus = user.isAdmin ? adminMenuItems : userMenuItems;
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -66,8 +86,8 @@ const ProfileMenu = () => {
         </Button>
       </MenuHandler>
       <MenuList className="p-1">
-        {profileMenuItems.map(({ label, icon, value }, key) => {
-          const isLastItem = key === profileMenuItems.length - 1;
+        {menus.map(({ label, icon, value }, key) => {
+          const isLastItem = key === menus.length - 1;
           return (
             <MenuItem
               key={label}
@@ -76,6 +96,12 @@ const ProfileMenu = () => {
                   case "profile":
 
                     break;
+
+                  case "products":
+                    nav('/product-admin');
+
+                    break;
+
                   case "signout":
                     dispatch(userLogOut());
 
