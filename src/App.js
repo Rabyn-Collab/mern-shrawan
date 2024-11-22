@@ -5,6 +5,8 @@ import SignUp from "./features/auth/SignUp";
 import Login from "./features/auth/Login";
 import UserRoutes from "./ui/UserRoutes";
 import ProductAdmin from "./features/admin/ProductAdmin";
+import ProductForm from "./features/admin/ProductForm";
+import ProductEdit from "./features/admin/productEdit/ProductEdit";
 
 
 const App = () => {
@@ -24,7 +26,14 @@ const App = () => {
           path: 'product-admin',
           element: <ProductAdmin />
         },
-
+        {
+          path: 'product-form',
+          element: <ProductForm />
+        },
+        {
+          path: 'product-edit/:id',
+          element: <ProductEdit />
+        },
         {
           element: <UserRoutes />,
           children: [

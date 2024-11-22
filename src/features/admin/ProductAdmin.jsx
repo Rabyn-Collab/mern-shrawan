@@ -14,14 +14,13 @@ const ProductAdmin = () => {
     return <h1>Loading....</h1>
   }
 
-  console.log(data);
 
 
   return (
     <div className="p-5">
       <div className="mb-4 flex justify-between">
         <h1 className="text-2xl font-semibold">Welcome To Shops</h1>
-        <Button onClick={() => nav('/add-product')} className="py-2 px-4" color="deep-purple" size="lg">Add Product</Button>
+        <Button onClick={() => nav('/product-form')} className="py-2 px-4" color="deep-purple" size="lg">Add Product</Button>
       </div>
 
       {<Card className="max-w-3xl">
@@ -73,7 +72,7 @@ const ProductAdmin = () => {
                     </Typography>
                   </td>
                   <td className={classes}>
-                    <Button onClick={() => nav(`/edit-product/${_id}`)} color="light-green" size="sm">Edit</Button>
+                    <Button onClick={() => nav(`/product-edit/${_id}`)} color="light-green" size="sm">Edit</Button>
                   </td>
 
                   <td className={classes}>
