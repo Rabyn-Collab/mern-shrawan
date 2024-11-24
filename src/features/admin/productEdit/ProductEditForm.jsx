@@ -67,7 +67,7 @@ const ProductEditForm = ({ product }) => {
             nav(-1);
 
           } else {
-            const response = await updateProduct({ id: product._id, body: val, token: user.token }).unwrap();
+            const response = await updateProduct({ id: product._id, body: formData, token: user.token }).unwrap();
             toast.success(response?.message);
             nav(-1);
 
@@ -163,7 +163,7 @@ const ProductEditForm = ({ product }) => {
 
         </div>
 
-        <Button type="submit" className="mt-6" fullWidth>
+        <Button loading={isLoading} type="submit" className="mt-6" fullWidth>
           Submit
         </Button>
 

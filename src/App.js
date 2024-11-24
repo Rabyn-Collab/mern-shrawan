@@ -7,6 +7,7 @@ import UserRoutes from "./ui/UserRoutes";
 import ProductAdmin from "./features/admin/ProductAdmin";
 import ProductForm from "./features/admin/ProductForm";
 import ProductEdit from "./features/admin/productEdit/ProductEdit";
+import ProductDetail from "./features/product/ProductDetail";
 
 
 const App = () => {
@@ -30,10 +31,19 @@ const App = () => {
           path: 'product-form',
           element: <ProductForm />
         },
+
         {
           path: 'product-edit/:id',
           element: <ProductEdit />
         },
+
+        {
+          path: 'product-detail/:id',
+          element: <ProductDetail />
+        },
+
+
+
         {
           element: <UserRoutes />,
           children: [
