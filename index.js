@@ -1,6 +1,8 @@
 import express from "express";
 import productRoutes from './routes/productRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
+
 import mongoose from "mongoose";
 import fileUpload from "express-fileupload";
 const port = 5000;
@@ -18,9 +20,7 @@ app.use(fileUpload({
 }));
 
 mongoose.connect('mongodb+srv://rabyn900:moles900@cluster0.ikwdezp.mongodb.net/Shops').then((val) => {
-  app.listen(port, () => {
-    console.log('listening and connected');
-  });
+
 }).catch((err) => {
   console.log(err);
 });
@@ -31,7 +31,10 @@ mongoose.connect('mongodb+srv://rabyn900:moles900@cluster0.ikwdezp.mongodb.net/S
 
 app.use('/api/users', authRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/orders', orderRoutes);
 
 
-
+app.listen(port, () => {
+  console.log('listening and connected');
+});
 
