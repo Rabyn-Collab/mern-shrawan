@@ -26,6 +26,9 @@ mongoose.connect('mongodb+srv://rabyn900:moles900@cluster0.ikwdezp.mongodb.net/S
 });
 
 
+app.get('/', (req, res) => {
+  return res.status(200).json({ message: 'Welcome to Shop' });
+});
 
 
 
