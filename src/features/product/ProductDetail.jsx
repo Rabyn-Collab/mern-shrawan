@@ -3,11 +3,11 @@ import { useNavigate, useParams } from 'react-router'
 import { Button, Card, Option, Select, Typography } from '@material-tailwind/react';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-// import { setToCart } from '../carts/cartSlice';
 // import ProductReview from './ProductReview';
 // import { user } from '../../dummy/user';
 import { useGetProductByIdQuery } from './productApi';
 import { base } from '../../data/apis';
+import { setCarts } from '../cart/cartSlice';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -61,13 +61,13 @@ export default ProductDetail
 export const AddCart = ({ product }) => {
   const dispatch = useDispatch();
   const nav = useNavigate();
-  //const { carts } = useSelector((state) => state.cartSlice);
+  const { carts } = useSelector((state) => state.cartSlice);
   const { user } = useSelector((state) => state.userSlice);
-  //const isExist = carts.find((cart) => cart._id === product._id);
+  const isExist = carts.find((cart) => cart.product === product._id);
 
   const formik = useFormik({
     initialValues: {
-      qty: 1
+      qty: isExist?.qty || 1
     }
   });
 
@@ -75,8 +75,15 @@ export const AddCart = ({ product }) => {
 
 
   const handleSubmit = () => {
-    // dispatch(setToCart({ ...product, qty: Number(formik.values.qty) }));
-    // nav('/carts');
+    dispatch(setCarts({
+      name: product.name,
+      qty: Number(formik.values.qty),
+      image: product.image,
+      price: product.price,
+      product: product._id,
+      stock: product.stock
+    }));
+    nav('/cart-page');
   }
 
   return (
@@ -132,10 +139,10 @@ export const AddCart = ({ product }) => {
               <div>
 
                 <select
-                  //  defaultValue={formik.values.qty} 
+                  defaultValue={formik.values.qty}
                   name="qty" id=""
-                // onChange={(e) => formik.setFieldValue('qty', e.target.value)}
 
+                  onChange={(e) => formik.setFieldValue('qty', e.target.value)}
                 >
                   {[...Array(product.stock).keys()].map((c) => {
                     return <option key={c + 1} value={c + 1}>{c + 1}</option>

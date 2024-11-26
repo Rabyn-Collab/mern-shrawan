@@ -8,9 +8,22 @@ import ProductAdmin from "./features/admin/ProductAdmin";
 import ProductForm from "./features/admin/ProductForm";
 import ProductEdit from "./features/admin/productEdit/ProductEdit";
 import ProductDetail from "./features/product/ProductDetail";
+import CartPage from "./features/cart/CartPage";
 
 
 const App = () => {
+
+  // const data = [
+  //   {
+  //     id: 1,
+  //     name: 'Product 1', price: 900, qty: 2
+  //   },
+  //   {
+  //     id: 1,
+  //     name: 'Product 1', price: 900, qty: 1
+  //   }
+  // ];
+  // const total = data.reduce((a, b) => a + b.qty * b.price, 0);
 
 
   const router = createBrowserRouter([
@@ -40,6 +53,12 @@ const App = () => {
         {
           path: 'product-detail/:id',
           element: <ProductDetail />
+        },
+
+
+        {
+          path: 'cart-page',
+          element: <CartPage />
         },
 
 
