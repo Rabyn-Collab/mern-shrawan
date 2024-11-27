@@ -76,7 +76,7 @@ export const AddCart = ({ product }) => {
 
   const handleSubmit = () => {
     dispatch(setCarts({
-      name: product.name,
+      name: product.title,
       qty: Number(formik.values.qty),
       image: product.image,
       price: product.price,

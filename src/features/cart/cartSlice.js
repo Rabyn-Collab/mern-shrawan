@@ -28,7 +28,7 @@ export const cartSlice = createSlice({
 
     },
     clearCarts: (state, action) => {
-      state = [];
+      state.carts = [];
       clearCartsFromLocal();
     }
 
