@@ -59,3 +59,26 @@ export const signUpUser = async (req, res) => {
 
   }
 }
+
+
+
+export const updateUser = async (req, res) => {
+  const { email, password, fullname } = req.body;
+
+  try {
+    const isExist = await User.findById(req.id);
+    if (isExist) {
+      isExist.fullname = fullname || isExist.fullname;
+      isExist.password = password || isExist.password;
+      isExist.email = email || isExist.email;
+      await isExist.save();
+    } else {
+      return res.status(401).json({ message: 'user not found' });
+    }
+
+  } catch (err) {
+    return res.status(400).json({ message: `${err}` });
+
+  }
+
+}
