@@ -27,13 +27,20 @@ export const authApi = createApi({
         method: 'POST'
       })
 
+    }),
+
+    userProfile: builder.query({
+      query: (token) => ({
+        url: '/users/profile',
+        headers: {
+          Authorization: token
+        },
+        method: 'GET'
+      })
     })
-
-
-
 
   })
 });
 
 
-export const { useUserLoginMutation, useUserSignUpMutation } = authApi;
+export const { useUserLoginMutation, useUserSignUpMutation, useUserProfileQuery } = authApi;
