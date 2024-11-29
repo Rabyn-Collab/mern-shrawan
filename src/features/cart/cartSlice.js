@@ -15,11 +15,9 @@ export const cartSlice = createSlice({
     setCarts: (state, action) => {
       const isExist = state.carts.find((cart) => cart.product === action.payload.product);
 
-
       if (isExist) {
         state.carts = state.carts.map((cart) => cart.product === action.payload.product ? action.payload : cart);
         setCartsToLocal(state.carts);
-
 
       } else {
         state.carts.push(action.payload);
@@ -27,6 +25,14 @@ export const cartSlice = createSlice({
       }
 
     },
+
+
+    removeCart: (state, action) => {
+      state.carts.splice(action.payload, 1);
+      setCartsToLocal(state.carts);
+    },
+
+
     clearCarts: (state, action) => {
       state.carts = [];
       clearCartsFromLocal();
@@ -36,4 +42,4 @@ export const cartSlice = createSlice({
   }
 });
 
-export const { setCarts, clearCarts } = cartSlice.actions;
+export const { setCarts, clearCarts, removeCart } = cartSlice.actions;

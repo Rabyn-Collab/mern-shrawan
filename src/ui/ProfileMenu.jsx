@@ -94,7 +94,7 @@ const ProfileMenu = ({ user }) => {
               onClick={() => {
                 switch (value) {
                   case "profile":
-
+                    nav('/user-profile')
                     break;
 
                   case "products":

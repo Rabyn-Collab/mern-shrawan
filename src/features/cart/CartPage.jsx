@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { base } from '../../data/apis';
-import { setCarts } from './cartSlice';
+import { removeCart, setCarts } from './cartSlice';
 import { ShowDialog } from '../../ui/ShowDialog';
+import { Button } from '@material-tailwind/react';
 
 
 const CartPage = () => {
@@ -23,7 +24,7 @@ const CartPage = () => {
         <div>
 
           <div >
-            {carts.map((cart) => {
+            {carts.map((cart, i) => {
               return <div className='grid grid-cols-4 gap-12 space-y-5' key={cart.product}>
                 <img className='w-full h-36 mb-3' src={`${base}/${cart.image}`} alt="" />
                 <div>
@@ -36,6 +37,10 @@ const CartPage = () => {
                   </select>
                 </div>
                 <h1>Rs.{cart.price}</h1>
+                <div>
+                  <Button onClick={() => dispatch(removeCart(i))} size='sm' >Remove</Button>
+                </div>
+
               </div>
             })}
 
