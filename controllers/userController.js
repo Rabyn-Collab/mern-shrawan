@@ -19,8 +19,6 @@ export const loginUser = async (req, res) => {
 
       return res.status(200).json({
         token,
-        fullname: isExist.fullname,
-        email: isExist.email,
         isAdmin: isExist.isAdmin,
         message: 'user successfully login'
       });
@@ -82,4 +80,16 @@ export const updateUser = async (req, res) => {
 
   }
 
+}
+
+
+
+export const getUserProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.id).select('fullname email');
+    if (!user) return res.status(404).json({ message: 'user not found' });
+    return res.status(200).json(user);
+  } catch (err) {
+    return res.status(400).json({ message: `${err}` });
+  }
 }
