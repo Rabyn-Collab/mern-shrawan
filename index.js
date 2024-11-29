@@ -2,15 +2,18 @@ import express from "express";
 import productRoutes from './routes/productRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
-
+import cookieParser from 'cookie-parser';
 import mongoose from "mongoose";
 import fileUpload from "express-fileupload";
 const port = 5000;
 import cors from 'cors';
 
 const app = express();
-app.use(cors());
-
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.static('uploads'));
 
