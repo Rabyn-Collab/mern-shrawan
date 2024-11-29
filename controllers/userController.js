@@ -72,6 +72,7 @@ export const updateUser = async (req, res) => {
       isExist.password = password || isExist.password;
       isExist.email = email || isExist.email;
       await isExist.save();
+      return res.status(200).json({ message: 'successfully updated' });
     } else {
       return res.status(401).json({ message: 'user not found' });
     }

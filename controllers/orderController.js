@@ -11,6 +11,15 @@ export const getAllOrder = async (req, res) => {
   }
 }
 
+export const getOrderUser = async (req, res) => {
+  try {
+    const orders = await Order.find({ user: req.id });
+    return res.status(200).json(orders);
+  } catch (err) {
+    return res.status(400).json({ message: `${err}` });
+  }
+}
+
 
 export const addOrder = async (req, res) => {
   const { totalAmount, orderItems } = req.body;
