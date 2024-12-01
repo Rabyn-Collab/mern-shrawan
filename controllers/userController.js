@@ -10,17 +10,20 @@ export const loginUser = async (req, res) => {
     if (isExist) {
       const pass = bcrypt.compareSync(password, isExist.password);
       if (!pass) return res.status(401).json({ message: 'invalid credential' });
-      console.log(isExist);
+
 
       const token = jwt.sign({
         id: isExist._id,
         isAdmin: isExist.isAdmin
       }, 'token');
-
+      res.cookie('jwt', token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None',
+        maxAge: 30 * 24 * 60 * 60 * 1000
+      });
       return res.status(200).json({
         token,
-        fullname: isExist.fullname,
-        email: isExist.email,
         isAdmin: isExist.isAdmin,
         message: 'user successfully login'
       });
@@ -57,5 +60,41 @@ export const signUpUser = async (req, res) => {
   } catch (err) {
     return res.status(400).json({ message: `${err}` });
 
+  }
+}
+
+
+
+export const updateUser = async (req, res) => {
+  const { email, password, fullname } = req.body;
+
+  try {
+    const isExist = await User.findById(req.id);
+    if (isExist) {
+      isExist.fullname = fullname || isExist.fullname;
+      isExist.password = password || isExist.password;
+      isExist.email = email || isExist.email;
+      await isExist.save();
+      return res.status(200).json({ message: 'successfully updated' });
+    } else {
+      return res.status(401).json({ message: 'user not found' });
+    }
+
+  } catch (err) {
+    return res.status(400).json({ message: `${err}` });
+
+  }
+
+}
+
+
+
+export const getUserProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.id).select('fullname email');
+    if (!user) return res.status(404).json({ message: 'user not found' });
+    return res.status(200).json(user);
+  } catch (err) {
+    return res.status(400).json({ message: `${err}` });
   }
 }

@@ -1,7 +1,8 @@
 import express from 'express';
-import { loginUser, signUpUser } from '../controllers/userController.js';
+import { getUserProfile, loginUser, signUpUser, updateUser } from '../controllers/userController.js';
 import Joi from 'joi';
 import validator from 'express-joi-validation';
+import { userCheck } from '../middlewares/authCheck.js';
 
 const validate = validator.createValidator({});
 
@@ -18,8 +19,12 @@ const loginSchema = Joi.object({
 
 const router = express.Router();
 
-router.route('/login').post(validate.body(loginSchema), loginUser);
 router.route('/signup').post(validate.body(signUpSchema), signUpUser);
+router.route('/login').post(validate.body(loginSchema), loginUser);
+router.route('/update').patch(userCheck, updateUser);
+router.route('/profile').get(userCheck, getUserProfile);
+
+
 
 export default router;
 

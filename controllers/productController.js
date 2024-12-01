@@ -1,5 +1,6 @@
 import Product from "../models/Product.js"
-
+import fs from 'fs';
+import mongoose from "mongoose";
 
 
 export const getTopProducts = (req, res, next) => {
@@ -12,6 +13,7 @@ export const getTopProducts = (req, res, next) => {
 
 
 export const getProducts = async (req, res) => {
+  console.log(req.headers.cookie);
 
   try {
 
@@ -66,12 +68,125 @@ export const getProducts = async (req, res) => {
 }
 
 
+export const getProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      const product = await Product.findById(id);
+      return res.status(200).json(product);
+    } else {
+      return res.status(400).json({ message: 'product not found' });
+    }
+  } catch (err) {
+    return res.status(400).json({ message: `${err}` });
+
+  }
+}
+
+
 
 
 export const createProduct = async (req, res) => {
+  const {
+    title,
+    description,
+    category, brand,
+    price, stock } = req.body;
+
   try {
+    await Product.create({
+      title,
+      description,
+      image: req.image,
+      category,
+      brand,
+      price: Number(price),
+      stock: Number(stock),
+    });
     return res.status(200).json({ message: 'success' });
   } catch (err) {
+    console.log(err);
+    fs.unlinkSync(`./uploads/${req.image}`);
+    return res.status(400).json({ message: `${err}` });
+  }
+}
 
+
+
+export const updateProduct = async (req, res) => {
+  const { id } = req.params;
+  const {
+    title,
+    description,
+    category, brand,
+    price, stock } = req.body;
+
+  try {
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ message: 'invalid id' });
+
+    const isExist = await Product.findById(id);
+    if (!isExist) return res.status(404).json({ message: 'product not found' });
+
+    if (req.newImage) {
+
+      fs.unlinkSync(`./uploads/${isExist.image}`);
+      await Product.findByIdAndUpdate(
+        id,
+        {
+          title: title || isExist.title,
+          description: description || isExist.description,
+          image: req.newImage,
+          category: category || isExist.category,
+          brand: brand || isExist.brand,
+          price: Number(price) || isExist.price,
+          stock: Number(stock) || isExist.stock
+        });
+
+    } else {
+      await Product.findByIdAndUpdate(id,
+        {
+          title: title || isExist.title,
+          description: description || isExist.description,
+          category: category || isExist.category,
+          brand: brand || isExist.brand,
+          price: Number(price) || isExist.price,
+          stock: Number(stock) || isExist.stock
+        });
+
+    }
+
+    return res.status(200).json({ message: 'success' });
+
+  } catch (err) {
+    console.log(err);
+    fs.unlinkSync(`./uploads/${req.image}`);
+    return res.status(400).json({ message: `${err}` });
+  }
+}
+
+
+
+export const removeProduct = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(400).json({ message: 'invalid id' });
+
+    const isExist = await Product.findById(id);
+    if (!isExist) return res.status(404).json({ message: 'product not found' });
+
+    await Product.findByIdAndDelete(id);
+    fs.unlink(`./uploads/${isExist.image}`, (err) => {
+      console.log(err);
+    });
+
+
+    return res.status(200).json({ message: 'success' });
+  } catch (err) {
+    console.log(err);
+    fs.unlinkSync(`./uploads/${req.image}`);
+    return res.status(400).json({ message: `${err}` });
   }
 }
