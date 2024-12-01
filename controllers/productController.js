@@ -2,6 +2,14 @@ import Product from "../models/Product.js"
 
 
 
+export const getTopProducts = (req, res, next) => {
+
+  req.query.rating = { gt: 4.7 };
+  req.query.limit = 5;
+  next();
+
+}
+
 
 export const getProducts = async (req, res) => {
 
@@ -23,6 +31,8 @@ export const getProducts = async (req, res) => {
 
 
     let qStr = JSON.stringify(queryObj);
+
+    console.log(qStr);
 
     qStr = qStr.replace(/\b(gte|gt|lte|lt|eq)\b/g, match => `$${match}`);
 
@@ -52,5 +62,16 @@ export const getProducts = async (req, res) => {
     return res.status(200).json({ length: response.length, products: response });
   } catch (err) {
     return res.status(400).json({ err: `${err}` });
+  }
+}
+
+
+
+
+export const createProduct = async (req, res) => {
+  try {
+    return res.status(200).json({ message: 'success' });
+  } catch (err) {
+
   }
 }

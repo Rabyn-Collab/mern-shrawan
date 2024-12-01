@@ -1,14 +1,15 @@
 
 
 
-export const someWare = (req, res, next) => {
 
+export const fileCheck = (req, res, next) => {
 
-  if (req.body.email) {
-    return next();
-  }
+  const file = req.files?.image;
 
+  file.mv(`./uploads/Mern.png`, (err) => {
+    console.log(err);
+  })
 
-  return res.status(400).json({ message: 'file not found' });
+  next();
 
 }
