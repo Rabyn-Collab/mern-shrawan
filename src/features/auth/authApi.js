@@ -5,9 +5,8 @@ import { baseUrl } from "../../data/apis";
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: baseUrl, credentials: 'include' }),
+  baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
   endpoints: (builder) => ({
-
 
     userLogin: builder.mutation({
 
@@ -36,11 +35,24 @@ export const authApi = createApi({
           Authorization: token
         },
         method: 'GET'
-      })
+      }),
+      providesTags: ['User']
+    }),
+
+    updateUserProfile: builder.mutation({
+      query: (q) => ({
+        url: '/users/update',
+        body: q.body,
+        headers: {
+          Authorization: q.token
+        },
+        method: 'PATCH'
+      }),
+      invalidatesTags: ['User']
     })
 
   })
 });
 
 
-export const { useUserLoginMutation, useUserSignUpMutation, useUserProfileQuery } = authApi;
+export const { useUserLoginMutation, useUserSignUpMutation, useUserProfileQuery, useUpdateUserProfileMutation } = authApi;

@@ -10,6 +10,7 @@ import ProductEdit from "./features/admin/productEdit/ProductEdit";
 import ProductDetail from "./features/product/ProductDetail";
 import CartPage from "./features/cart/CartPage";
 import UserProfile from "./features/profile/UserProfile";
+import OrderDetail from "./features/order/OrderDetail";
 
 
 const App = () => {
@@ -54,6 +55,11 @@ const App = () => {
         {
           path: 'product-detail/:id',
           element: <ProductDetail />
+        },
+
+        {
+          path: 'order-detail/:id',
+          element: <OrderDetail />
         },
 
         {

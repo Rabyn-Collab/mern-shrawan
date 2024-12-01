@@ -7,6 +7,7 @@ import { orderApi } from "../features/order/orderApi";
 
 export const store = configureStore({
   reducer: {
+
     [userSlice.name]: userSlice.reducer,
     [cartSlice.name]: cartSlice.reducer,
     [authApi.reducerPath]: authApi.reducer,

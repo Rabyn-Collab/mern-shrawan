@@ -1,12 +1,30 @@
 import { Button, Card, Input, Typography } from "@material-tailwind/react";
 import { useFormik } from "formik";
+import { useUpdateUserProfileMutation } from "../auth/authApi";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const ProfileCard = ({ userData }) => {
+
+  const { user } = useSelector((state) => state.userSlice);
+
+  const [updateUser, { isLoading }] = useUpdateUserProfileMutation();
 
   const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
       fullname: userData?.fullname,
       email: userData?.email
+    },
+    onSubmit: async (val) => {
+      try {
+        await updateUser({
+          body: val,
+          token: user.token
+        }).unwrap();
+        toast.success('success');
+      } catch (err) {
+        toast.error(`${err.data?.message}`);
+      }
     }
   });
 
@@ -49,7 +67,7 @@ const ProfileCard = ({ userData }) => {
 
           </div>
 
-          <Button type='submit' className="mt-6" fullWidth>
+          <Button loading={isLoading} type='submit' className="mt-6" fullWidth>
             Update
           </Button>
 
