@@ -16,12 +16,7 @@ export const loginUser = async (req, res) => {
         id: isExist._id,
         isAdmin: isExist.isAdmin
       }, 'token');
-      res.cookie('jwt', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'None',
-        maxAge: 30 * 24 * 60 * 60 * 1000
-      });
+
       return res.status(200).json({
         token,
         isAdmin: isExist.isAdmin,

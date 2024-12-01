@@ -21,6 +21,31 @@ export const getOrderUser = async (req, res) => {
 }
 
 
+export const getOrderDetail = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id).populate([
+      {
+        path: 'user',
+        model: 'User',
+        select: 'fullname email'
+      },
+      {
+        path: 'orderItems.product',
+        model: 'Product',
+        select: 'name image'
+
+      }
+    ]);
+    return res.status(200).json(order);
+  } catch (err) {
+    return res.status(400).json({ message: `${err}` });
+  }
+}
+
+
+
+
+
 export const addOrder = async (req, res) => {
   const { totalAmount, orderItems } = req.body;
   try {
