@@ -14,6 +14,8 @@ export const getTopProducts = (req, res, next) => {
 
 export const getProducts = async (req, res) => {
 
+  // console.log(req.headers);
+
 
   try {
 

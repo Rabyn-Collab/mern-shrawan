@@ -2,7 +2,6 @@ import express from "express";
 import productRoutes from './routes/productRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
-import cookieParser from 'cookie-parser';
 import mongoose from "mongoose";
 import fileUpload from "express-fileupload";
 const port = 5000;

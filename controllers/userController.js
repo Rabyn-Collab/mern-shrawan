@@ -17,11 +17,25 @@ export const loginUser = async (req, res) => {
         isAdmin: isExist.isAdmin
       }, 'token');
 
+      res.cookie(
+        'jwt',
+        token,
+        {
+          httpOnly: true,
+          maxAge: 24 * 60 * 60 * 1000,
+          sameSite: 'none',
+          secure: false
+        }
+      );
+
       return res.status(200).json({
         token,
         isAdmin: isExist.isAdmin,
         message: 'user successfully login'
       });
+
+
+
 
     } else {
       return res.status(401).json({ message: 'invalid credential' });
