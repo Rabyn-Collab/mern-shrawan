@@ -11,6 +11,7 @@ import ProductDetail from "./features/product/ProductDetail";
 import CartPage from "./features/cart/CartPage";
 import UserProfile from "./features/profile/UserProfile";
 import OrderDetail from "./features/order/OrderDetail";
+import SearchPage from "./features/search/SearchPage";
 
 
 const App = () => {
@@ -71,6 +72,11 @@ const App = () => {
         {
           path: 'cart-page',
           element: <CartPage />
+        },
+
+        {
+          path: 'search/:search',
+          element: <SearchPage />
         },
 
 

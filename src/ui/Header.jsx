@@ -3,6 +3,7 @@ import ProfileMenu from "./ProfileMenu";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
+import SearchInput from "../features/search/SearchInput";
 
 export function Header() {
   const nav = useNavigate();
@@ -23,10 +24,15 @@ export function Header() {
 
 
 
+        <div className="flex gap-4">
+          <SearchInput />
 
-        {user ? <ProfileMenu user={user} /> : <Button onClick={() => nav('/login')} size="sm" variant="text">
-          <span>Log In</span>
-        </Button>}
+          {user ? <ProfileMenu user={user} /> : <Button onClick={() => nav('/login')} size="sm" variant="text">
+            <span>Log In</span>
+          </Button>}
+
+        </div>
+
 
 
       </div>
@@ -34,3 +40,8 @@ export function Header() {
     </Navbar>
   );
 }
+
+
+
+
+
