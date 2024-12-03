@@ -24,7 +24,7 @@ export const loginUser = async (req, res) => {
           httpOnly: true,
           maxAge: 24 * 60 * 60 * 1000,
           sameSite: 'none',
-          secure: false
+          secure: true
         }
       );
 
@@ -103,6 +103,16 @@ export const getUserProfile = async (req, res) => {
     const user = await User.findById(req.id).select('fullname email');
     if (!user) return res.status(404).json({ message: 'user not found' });
     return res.status(200).json(user);
+  } catch (err) {
+    return res.status(400).json({ message: `${err}` });
+  }
+}
+
+
+export const userLogout = async (req, res) => {
+  try {
+    res.clearCookie('jwt');
+    res.status(200).json({ message: 'Logged out successfully' });
   } catch (err) {
     return res.status(400).json({ message: `${err}` });
   }
