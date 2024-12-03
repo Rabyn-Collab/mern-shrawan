@@ -1,11 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { baseUrl } from "../../data/apis";
+import { authApi } from "../auth/authApi";
 
 
-export const orderApi = createApi({
-  reducerPath: 'orderApi',
-  baseQuery: fetchBaseQuery({ baseUrl: baseUrl }),
-
+export const orderApi = authApi.injectEndpoints({
   endpoints: (builder) => ({
 
     getAllOrders: builder.query({
