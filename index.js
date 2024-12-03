@@ -10,7 +10,7 @@ import cors from 'cors';
 const app = express();
 app.use(cors(
   {
-    origin: ['https://mern-shrawan.onrender.com'],
+    origin: '*',
     credentials: true
   }
 ));
