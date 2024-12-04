@@ -6,7 +6,7 @@ const TABLE_HEAD = ["ProductId", "Total", "CreatedAt", ''];
 
 const UserOrder = ({ user }) => {
   const nav = useNavigate();
-  const { isLoading, data, isError, error } = useGetUserOrdersQuery(user.token);
+  const { isLoading, data, isError, error } = useGetUserOrdersQuery();
 
   if (isLoading) {
     return <h1>Loading.....</h1>

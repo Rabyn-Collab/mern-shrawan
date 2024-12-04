@@ -40,9 +40,6 @@ export const productApi = appApi.injectEndpoints({
         url: '/products',
         body: q.body,
         method: 'POST',
-        headers: {
-          Authorization: q.token
-        }
       }),
       invalidatesTags: ['Product']
     }),
@@ -53,9 +50,6 @@ export const productApi = appApi.injectEndpoints({
         url: `/products/${q.id}`,
         body: q.body,
         method: 'PATCH',
-        headers: {
-          Authorization: q.token
-        }
       }),
       invalidatesTags: ['Product']
     }),
@@ -64,9 +58,6 @@ export const productApi = appApi.injectEndpoints({
       query: (q) => ({
         url: `/products/${q.id}`,
         method: 'DELETE',
-        headers: {
-          Authorization: q.token
-        }
       }),
       invalidatesTags: ['Product']
     }),

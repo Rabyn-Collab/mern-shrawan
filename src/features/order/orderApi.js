@@ -7,9 +7,6 @@ export const orderApi = authApi.injectEndpoints({
     getAllOrders: builder.query({
       query: (token) => ({
         url: '/orders',
-        headers: {
-          Authorization: token
-        },
         method: 'GET'
       }),
       providesTags: ['Order']
@@ -18,9 +15,6 @@ export const orderApi = authApi.injectEndpoints({
     getUserOrders: builder.query({
       query: (token) => ({
         url: '/orders/users',
-        headers: {
-          Authorization: token
-        },
         method: 'GET'
       }),
       providesTags: ['Order']
@@ -30,9 +24,6 @@ export const orderApi = authApi.injectEndpoints({
     getOrderDetail: builder.query({
       query: (q) => ({
         url: `/orders/users/${q.id}`,
-        headers: {
-          Authorization: q.token
-        },
         method: 'GET'
       }),
       providesTags: ['Order']
@@ -42,9 +33,6 @@ export const orderApi = authApi.injectEndpoints({
       query: (q) => ({
         url: '/orders',
         body: q.body,
-        headers: {
-          Authorization: q.token
-        },
         method: 'POST'
       }),
       invalidatesTags: ['Order']

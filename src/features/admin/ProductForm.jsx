@@ -18,7 +18,7 @@ const ProductForm = () => {
 
   const [addProduct, { isLoading }] = useAddProductMutation();
 
-  const { user } = useSelector((state) => state.userSlice);
+
   const nav = useNavigate();
   const productSchema = Yup.object({
     product_name: Yup.string().required(),
@@ -63,7 +63,6 @@ const ProductForm = () => {
         try {
           await addProduct({
             body: formData,
-            token: user.token
           }).unwrap();
           toast.success('add success');
           nav(-1);

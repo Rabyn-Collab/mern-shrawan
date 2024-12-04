@@ -38,9 +38,6 @@ export const authApi = appApi.injectEndpoints({
       query: (q) => ({
         url: '/users/update',
         body: q.body,
-        headers: {
-          Authorization: q.token
-        },
         method: 'PATCH'
       }),
       invalidatesTags: ['User']

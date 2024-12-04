@@ -20,7 +20,7 @@ import { useUpdateProductMutation } from "../../product/productApi";
 const ProductEditForm = ({ product }) => {
   const [updateProduct, { isLoading }] = useUpdateProductMutation();
 
-  const { user } = useSelector((state) => state.userSlice);
+
   const nav = useNavigate();
 
   const productSchema = Yup.object({
@@ -62,12 +62,12 @@ const ProductEditForm = ({ product }) => {
         try {
           if (val.image) {
             formData.append('image', val.image);
-            const response = await updateProduct({ id: product._id, body: formData, token: user.token }).unwrap();
+            const response = await updateProduct({ id: product._id, body: formData }).unwrap();
             toast.success(response?.message);
             nav(-1);
 
           } else {
-            const response = await updateProduct({ id: product._id, body: formData, token: user.token }).unwrap();
+            const response = await updateProduct({ id: product._id, body: formData }).unwrap();
             toast.success(response?.message);
             nav(-1);
 
