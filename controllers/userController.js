@@ -16,17 +16,26 @@ export const loginUser = async (req, res) => {
         id: isExist._id,
         isAdmin: isExist.isAdmin
       }, 'token');
-      res.cookie('jwt', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'None',
-        maxAge: 30 * 24 * 60 * 60 * 1000
-      });
+
+      res.cookie(
+        'jwt',
+        token,
+        {
+          httpOnly: true,
+          maxAge: 24 * 60 * 60 * 1000,
+          sameSite: 'None',
+          secure: true
+        }
+      );
+
       return res.status(200).json({
         token,
         isAdmin: isExist.isAdmin,
         message: 'user successfully login'
       });
+
+
+
 
     } else {
       return res.status(401).json({ message: 'invalid credential' });
@@ -94,6 +103,16 @@ export const getUserProfile = async (req, res) => {
     const user = await User.findById(req.id).select('fullname email');
     if (!user) return res.status(404).json({ message: 'user not found' });
     return res.status(200).json(user);
+  } catch (err) {
+    return res.status(400).json({ message: `${err}` });
+  }
+}
+
+
+export const userLogout = async (req, res) => {
+  try {
+    res.clearCookie('jwt');
+    res.status(200).json({ message: 'Logged out successfully' });
   } catch (err) {
     return res.status(400).json({ message: `${err}` });
   }

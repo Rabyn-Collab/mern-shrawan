@@ -13,7 +13,9 @@ export const getTopProducts = (req, res, next) => {
 
 
 export const getProducts = async (req, res) => {
-  console.log(req.headers.cookie);
+
+
+
 
   try {
 
@@ -34,7 +36,7 @@ export const getProducts = async (req, res) => {
 
     let qStr = JSON.stringify(queryObj);
 
-    console.log(qStr);
+
 
     qStr = qStr.replace(/\b(gte|gt|lte|lt|eq)\b/g, match => `$${match}`);
 

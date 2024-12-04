@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 
 export const userCheck = (req, res, next) => {
-  const token = req.headers.authorization;
+  const token = req.cookies?.jwt;
 
   const decode = jwt.decode(token, 'token');
   if (decode) {
