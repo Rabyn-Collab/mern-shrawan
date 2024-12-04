@@ -9,9 +9,6 @@ export const appApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
     credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json'
-    }
   }),
   endpoints: (builder) => ({})
 });
