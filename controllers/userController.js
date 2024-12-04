@@ -23,7 +23,7 @@ export const loginUser = async (req, res) => {
         {
           httpOnly: true,
           maxAge: 24 * 60 * 60 * 1000,
-          sameSite: 'none',
+          sameSite: 'None',
           secure: true
         }
       );
