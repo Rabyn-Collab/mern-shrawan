@@ -6,13 +6,14 @@ import mongoose from "mongoose";
 import fileUpload from "express-fileupload";
 const port = 5000;
 import cors from 'cors';
+import cookieParser from "cookie-parser";
 
 const app = express();
 app.use(cors({
-  origin: 'https://mern-shrawan.vercel.app',
+  origin: true,
   credentials: true,
 }));
-
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.static('uploads'));
 
