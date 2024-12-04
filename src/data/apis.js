@@ -1,6 +1,6 @@
 
 //url
-export const base = 'http://192.168.1.64:5000';
+export const base = 'https://mern-shrawan.onrender.com';
 export const baseUrl = `${base}/api`;
 
 
