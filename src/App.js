@@ -12,9 +12,11 @@ import CartPage from "./features/cart/CartPage";
 import UserProfile from "./features/profile/UserProfile";
 import OrderDetail from "./features/order/OrderDetail";
 import SearchPage from "./features/search/SearchPage";
+import { useCookies } from "react-cookie";
 
 
 const App = () => {
+
 
   // const data = [
   //   {

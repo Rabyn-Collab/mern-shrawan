@@ -8,7 +8,7 @@ export const appApi = createApi({
   reducerPath: 'appApi',
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
-    credentials: 'include',
+    credentials: 'include'
   }),
   endpoints: (builder) => ({})
 });
