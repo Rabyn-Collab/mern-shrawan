@@ -110,6 +110,7 @@ export const getUserProfile = async (req, res) => {
 
 
 export const userLogout = async (req, res) => {
+
   try {
     res.clearCookie('jwt');
     res.status(200).json({ message: 'Logged out successfully' });
